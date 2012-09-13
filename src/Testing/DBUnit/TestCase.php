@@ -5,14 +5,16 @@ namespace Testing\DBUnit;
 use PDO;
 use PHPUnit_Extensions_Database_TestCase;
 
-abstract class TestCase extends PHPUnit_Extensions_Database_TestCase {
+abstract class TestCase extends PHPUnit_Extensions_Database_TestCase
+{
 
-    private static $pdo;
+    private static $_pdo;
 
-    public static function setUpBeforeClass() {
-        self::$pdo = new PDO('sqlite::memory:');
+    public static function setUpBeforeClass()
+    {
+        self::$_pdo = new PDO('sqlite::memory:');
 
-        self::$pdo->exec(
+        self::$_pdo->exec(
             '
             CREATE TABLE whatilearned_knowledgebit(
                 id unsigned NOT NULL PRIMARY KEY,
@@ -26,11 +28,13 @@ abstract class TestCase extends PHPUnit_Extensions_Database_TestCase {
         );
     }
 
-    protected function getPDO() {
-        return self::$pdo;
+    protected function getPDO()
+    {
+        return self::$_pdo;
     }
 
-    protected function getConnection() {
-        return $this->createDefaultDBConnection(self::$pdo, ':memory:');
+    protected function getConnection()
+    {
+        return $this->createDefaultDBConnection(self::$_pdo, ':memory:');
     }
 }
