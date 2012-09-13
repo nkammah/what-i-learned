@@ -11,7 +11,8 @@ class Record
         $pdo,
         $table_name,
         $clean_fields = array(),
-        $dirty_fields = array())
+        $dirty_fields = array()
+    )
     {
         $this->_pdo = $pdo;
         $this->_tableName = $table_name;
@@ -26,7 +27,7 @@ class Record
             return $this->_dirtyFields[$field];
         };
         
-        if (isset($this->_cleanFields[$field]) ){
+        if (isset($this->_cleanFields[$field])) {
             return $this->_cleanFields[$field];
         };
         

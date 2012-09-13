@@ -38,9 +38,10 @@ class KnowledgeBit
     
     function __toString()
     {
-        return sprintf("%s (%s)",
-                       $this->getTitle(),
-                       $this->getId()
-                       );
+        return sprintf(
+            "%s (%s)",
+            $this->getTitle(),
+            $this->getId()
+        );
     }
 }

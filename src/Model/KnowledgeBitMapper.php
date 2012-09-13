@@ -19,9 +19,9 @@ class KnowledgeBitMapper
     function get($id)
     {        
         $kbRecord = $this->_mapper->get(
-                'whatilearned_knowledgebit',
-                $id
-                );
+            'whatilearned_knowledgebit',
+            $id
+        );
 
         if (is_null($kbRecord)) {
             return null;
