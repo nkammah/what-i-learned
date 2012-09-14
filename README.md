@@ -16,6 +16,8 @@ So you finally nailed that "find" command and it took you 10 minutes and you rea
 
 This app will act as my "text file" and simply provide a way to save/view/search "knowledge bits" or what I learned today.
 
+Now seriously - this is pretty much a blog with backlinks.... 
+
 Roadmap
 -------
 
@@ -26,6 +28,7 @@ List of topics I want to explore:
 * Database testing/mocking
 * REST + json interface + testing of REST resources
 * filesystem testing ( by providing an option to save to disk "knowledge bits")
+* user management
 * ...
 
 References
