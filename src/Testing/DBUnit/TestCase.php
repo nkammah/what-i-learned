@@ -17,7 +17,7 @@ abstract class TestCase extends PHPUnit_Extensions_Database_TestCase
         self::$_pdo->exec(
             '
             CREATE TABLE whatilearned_knowledgebit(
-                id unsigned NOT NULL PRIMARY KEY,
+                id unsigned INTEGER PRIMARY KEY,
                 title varchar(50) NOT NULL,
                 description varchar(50),
                 category varchar(100),
@@ -37,4 +37,5 @@ abstract class TestCase extends PHPUnit_Extensions_Database_TestCase
     {
         return $this->createDefaultDBConnection(self::$_pdo, ':memory:');
     }
+
 }
