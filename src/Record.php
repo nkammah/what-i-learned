@@ -34,4 +34,67 @@ class Record
         return null;     
     }
     
+    function setField($field, $value)
+    {
+        if ($field == 'id') {
+            throw new InvalidArgumentException(
+                'You can\'t set the ID field'
+            );
+        };
+        
+        $this->_dirtyFields[$field] = $value;
+        
+        return true;     
+    }
+    
+    
+    function save()
+    {
+        // no changes
+        if (empty($this->_dirtyFields)) {
+            return false;
+        }
+        
+        // check if new object or update
+        if (isset($this->_cleanFields['id'])) {
+            $sql = sprintf("UPDATE %s SET ", $this->_tableName);
+            $values = array();
+            foreach ($this->_dirtyFields as $k=>$v) {
+                $values[] = sprintf("%s = '%s'", $k, $v);
+            };
+            $sql .= implode(',', $values);
+            $sql .= sprintf(" where id=%s", $this->_cleanFields['id']);
+        } else {
+            $sql  = sprintf(
+                'INSERT INTO %s (%s) values (%s)',
+                $this->_tableName,
+                implode(',', array_keys($this->_dirtyFields)),
+                implode(
+                    ',',
+                    array_map(
+                        function ($v) {
+                            return "'$v'";
+                        },
+                        array_values($this->_dirtyFields)
+                    )
+                )
+            );
+        };
+        
+        $this->_pdo->query($sql);
+        
+        // Save the ID
+        $this->_cleanFields['id'] = $this->_pdo->lastInsertId();
+        
+        // Save new fields
+        $this->_cleanFields = array_merge(
+            $this->_cleanFields,
+            $this->_dirtyFields
+        );
+        
+        // Clear the dirty fields
+        $this->_dirtyFields = array();
+        
+        return true;
+    }
 }
