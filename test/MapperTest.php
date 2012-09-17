@@ -65,4 +65,12 @@ class MapperTest extends DBUnitTestCase
     
         $this->assertEquals($expected, $actual);
     }
+    
+    public function testGetNewRecord()
+    {
+        $this->assertInstanceOf(
+            'Record',
+            $this->mapper->create('whatilearned_knowledgebit')
+        );
+    }
 }
